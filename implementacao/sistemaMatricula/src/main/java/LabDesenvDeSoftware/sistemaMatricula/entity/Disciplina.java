@@ -17,5 +17,12 @@ public class Disciplina {
 
     @Column(name = "alunosMatriculados")
     private Aluno[] alunos;
+
+    public boolean verificarLimiteVagas(){
+        return false;
+    }
+
+    public void matricularAluno(Aluno aluno){
+    }
     
 }
