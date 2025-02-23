@@ -1,6 +1,7 @@
 # LabDesenvDeSoftware
 Repositório da matéria de Laboratório de Desenvolvimento de Software da do curso de Engenharia de Software da PUC Minas
 
+![image](https://github.com/user-attachments/assets/f23e00d4-951c-42fb-b522-99d8c1fba9c1)
 
 
 
