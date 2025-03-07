@@ -10,6 +10,10 @@ Repositório da matéria de Laboratório de Desenvolvimento de Software da do cu
 ### Aluno
 
 **Como** aluno,
+**Eu quero** fazer login no sistema,
+**Para que** eu possa acessar minhas informações e fazer alterações.
+
+**Como** aluno,
 **Eu quero** me matricular em até 4 disciplinas obrigatórias,
 **Para que** eu possa cumprir os requisitos do meu curso.
 
@@ -21,14 +25,22 @@ Repositório da matéria de Laboratório de Desenvolvimento de Software da do cu
 **Eu quero** poder me matricular apenas dentro do período de matrículas,
 **Para que** eu possa organizar minha grade de horários conforme o cronograma da universidade.
 
+**Como** aluno,
+**Eu quero** poder atualizar minha matrícula em uma disciplina,
+**Para que** eu possa organizar minha grade de disciplinas.
+
 ### Secretaria
+
+**Como** secretaria,
+**Eu quero** fazer login no sistema,
+**Para que** eu possa acessar as informações e fazer alterações.
 
 **Como** secretária,
 **Eu quero** poder gerar o currículo acadêmico de cada semestre,
 **Para que** os alunos tenham acesso às disciplinas disponíveis.
 
 **Como** secretária,
-**Eu quero** atualizar as informações sobre disciplinas, professores e alunos,
+**Eu quero** atualizar as informações sobre disciplinas, professores, matrículas e alunos,
 **Para que** o sistema reflita sempre os dados mais recentes.
 
 **Como** secretária,
@@ -40,10 +52,14 @@ Repositório da matéria de Laboratório de Desenvolvimento de Software da do cu
 **Para que** a universidade possa otimizar a alocação de recursos.
 
 **Como** secretária,
-**Eu quero** encerrar as inscrições em uma disciplina quando o número de alunos atingir 60,
+**Eu quero** poder encerrar as inscrições em uma disciplina quando o número de alunos atingir 60,
 **Para que** não haja superlotação nas turmas.
 
 ### Professor
+
+**Como** professor,
+**Eu quero** fazer login no sistema,
+**Para que** eu possa acessar as informações e fazer alterações.
 
 **Como** professor,
 **Eu quero** acessar o sistema para visualizar a lista de alunos matriculados em minhas disciplinas,
