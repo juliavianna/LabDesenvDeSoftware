@@ -7,8 +7,8 @@ actor Professor
 actor Secretaria
 rectangle sistema {
     (Matricular) -- Aluno
-    (Cancelar Matrícula) -- Aluno
-    
+    (Atualizar Matrícula) -- Aluno
+    (Efetuar Login) -- Aluno
 
     Secretaria -- (Atualizar Disciplina)
     Secretaria -- (Cadastrar Disciplina)
@@ -16,12 +16,14 @@ rectangle sistema {
     Secretaria -- (Atualizar Aluno)
     Secretaria -- (Atualizar Matrículas)
     Secretaria -- (Atualizar Professor)
+    Secretaria -- (Efetuar Login)
     
-    (Matricular) .> (Optativa) : extends
-    (Matricular) .> (Obrigatória) : include
+    (Matricular) .> (Matricular Optativa) : extends
+    (Matricular) .> (Matricular Obrigatória) : include
     
     '(Matricular) .> (Atualizar Disciplina) : extends
-    (Cancelar Matrícula) .> (Atualizar Disciplina) : extends
+    (Atualizar Matrícula) .> (Atualizar Disciplina) : extends
     (Consultar Alunos da Disciplina) -- Professor
+    (Efetuar Login) -- Professor
     
 }

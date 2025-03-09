@@ -1,0 +1,40 @@
+@startuml
+
+class Usuario {
+    -int id
+    -String nome
+    -String email
+    -String senha
+}
+
+class Aluno {
+    -final int MAXIMO_OPTATIVAS = 2
+    -final int MAXIMO_OBRIGATORIAS = 6
+    -int matricula
+    -int periodo
+    +Disciplina[] disciplinasOptativas
+    +Disciplina[] disciplinasObrigatorias
+    +void matricular(Disciplina disciplina)
+    +void cancelarMatricula(Disciplina disciplina)
+    +int getPeriodo()
+}
+
+class Disciplina {
+    -String nome
+    -int periodo
+    -int vagas
+    +Aluno[] alunosMatriculados
+    +boolean verificarLimiteVagas()
+    +void matricularAluno(Aluno aluno)
+}
+
+class Professor {
+    +Disciplina[] disciplinas
+    +Aluno[] consultarAlunos(Disciplina disciplina)
+}
+
+Usuario <|-- Aluno
+Aluno "*" -- "*" Disciplina : Matriculado
+Professor "*" -- "*" Disciplina : Leciona
+
+@enduml
