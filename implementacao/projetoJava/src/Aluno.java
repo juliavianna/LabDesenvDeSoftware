@@ -1,5 +1,5 @@
 public class Aluno extends Usuario {
-    
+
     final int MAX_OBRIGATORIAS = 4;
     final int MAX_OPTATIVAS = 2;
     private int periodo;
@@ -9,9 +9,11 @@ public class Aluno extends Usuario {
     public Aluno(String nome, String email, String senha, int periodo) {
         super(nome, email, senha);
         this.periodo = periodo;
+        this.disciplinasObrigatorias = new Disciplina[MAX_OBRIGATORIAS];
+        this.disciplinasOptativas = new Disciplina[MAX_OPTATIVAS];
     }
 
-    public void matricular(Disciplina disciplina) { 
+    public void matricular(Disciplina disciplina) {
         if (disciplina.isObrigatoria()) {
             // Verifica se há espaço nas disciplinas obrigatórias
             for (int i = 0; i < disciplinasObrigatorias.length; i++) {
@@ -38,7 +40,7 @@ public class Aluno extends Usuario {
     }
 
     // Método para cancelar a matrícula do aluno em uma disciplina
-    public void cancelarMatricula(Disciplina disciplina) { 
+    public void cancelarMatricula(Disciplina disciplina) {
         // Verifica se o aluno está matriculado na disciplina obrigatória
         if (disciplina.isObrigatoria()) {
             for (int i = 0; i < disciplinasObrigatorias.length; i++) {
@@ -64,15 +66,27 @@ public class Aluno extends Usuario {
         }
     }
 
-    public int getPeriodo(){
+    public int getPeriodo() {
         return periodo;
     }
 
-    public Disciplina[] getDisciplinasObrigatorias(){
-        return disciplinasObrigatorias;
+    public String getDisciplinasObrigatorias() {
+        StringBuilder lista = new StringBuilder();
+        for (Disciplina d : disciplinasObrigatorias) {
+            if (d != null) {
+                lista.append(d.getNome()).append(", ");
+            }
+        }
+        return lista.length() > 0 ? lista.substring(0, lista.length() - 2) : "Nenhuma";
     }
 
-    public Disciplina[] getDisciplinasOptativas(){
-        return disciplinasOptativas;
+    public String getDisciplinasOptativas() {
+        StringBuilder lista = new StringBuilder();
+        for (Disciplina d : disciplinasOptativas) {
+            if (d != null) {
+                lista.append(d.getNome()).append(", ");
+            }
+        }
+        return lista.length() > 0 ? lista.substring(0, lista.length() - 2) : "Nenhuma";
     }
 }

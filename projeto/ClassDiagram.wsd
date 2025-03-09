@@ -1,6 +1,6 @@
 @startuml
 
-class Usuario {
+abstract class Usuario {
     -int id
     -String nome
     -String email
@@ -9,20 +9,20 @@ class Usuario {
 
 class Aluno {
     -final int MAXIMO_OPTATIVAS = 2
-    -final int MAXIMO_OBRIGATORIAS = 6
+    -final int MAXIMO_OBRIGATORIAS = 4
     -int matricula
     -int periodo
-    +Disciplina[] disciplinasOptativas
-    +Disciplina[] disciplinasObrigatorias
+    - Disciplina[] disciplinasOptativas
+    - Disciplina[] disciplinasObrigatorias
     +void matricular(Disciplina disciplina)
     +void cancelarMatricula(Disciplina disciplina)
     +int getPeriodo()
 }
 
 class Disciplina {
+    -final int MAXIMO_ALUNOS = 60
     -String nome
     -int periodo
-    -int vagas
     +Aluno[] alunosMatriculados
     +boolean verificarLimiteVagas()
     +void matricularAluno(Aluno aluno)
@@ -34,6 +34,7 @@ class Professor {
 }
 
 Usuario <|-- Aluno
+Usuario <|-- Professor
 Aluno "*" -- "*" Disciplina : Matriculado
 Professor "*" -- "*" Disciplina : Leciona
 
