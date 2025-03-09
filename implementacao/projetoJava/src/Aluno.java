@@ -1,7 +1,7 @@
 public class Aluno extends Usuario {
     
-    final int MAXIMO_OPTATIVAS = 2;
-    final int MAXIMO_OBRIGATORIAS = 6;
+    final int MAX_OBRIGATORIAS = 4;
+    final int MAX_OPTATIVAS = 2;
     private int matricula;
     private int periodo;
     private Disciplina[] disciplinasOptativas;
