@@ -7,8 +7,8 @@ public abstract class Usuario {
     private String email;
     private String senha;
 
-    public Usuario(int id, String nome, String email, String senha) {
-        this.id = setId();
+    public Usuario(String nome, String email, String senha) {
+        this.id = gerarIdAleatorio();
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -18,9 +18,9 @@ public abstract class Usuario {
             return id;
         }
     
-        public void setId() {
+        private int gerarIdAleatorio() {
             Random random = new Random();
-            this.id = random.nextInt(10000);
+            return random.nextInt(10000); // Gera um número aleatório entre 0 e 9999
         }
     
         public String getNome() {
@@ -41,6 +41,10 @@ public abstract class Usuario {
     
         public void setSenha(String senha) {
             this.senha = senha;
+        }
+
+        public String getSenha(){
+            return senha;
         }
 
         public boolean realizarLogin(String email, String senha) {
