@@ -75,5 +75,9 @@ public class Disciplina {
         }
         return qtdAlunos;
     }
+
+    public int getPeriodo() {
+        return periodo;
+    }
     
 }

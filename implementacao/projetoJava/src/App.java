@@ -6,21 +6,21 @@ public class App {
         Aluno aluno1 = new Aluno("João", "joao@email.com", "1234", 1);
         Aluno aluno2 = new Aluno("Maria", "maria@email.com", "5678", 4);
         Professor professor = new Professor("José Silva", "professor@email.com", "prof123");
-        Aluno[] alunosPsicCores = new Aluno[60];
+        Aluno[] alunosPsicCores = new Aluno[60]; 
         alunosPsicCores[0] = aluno1;
-        alunosPsicCores[1] = aluno2;
+        alunosPsicCores[1] = aluno2;   
         Aluno[] alunosCalcI = new Aluno[60];
         Aluno[] alunosFisica = new Aluno[60];
         Aluno[] alunosLitBr = new Aluno[60];
-
+        
         // Criando disciplinas
-        Disciplina disciplina1 = new Disciplina("Cálculo I", 1, true, alunosCalcI);
+        Disciplina disciplina1 = new Disciplina("Cálculo I", 1, true,alunosCalcI);
         Disciplina disciplina2 = new Disciplina("Psicologia das Cores", 7, false, alunosPsicCores);
-        Disciplina disciplina3 = new Disciplina("Física", 1, true, alunosFisica);
-        Disciplina disciplina4 = new Disciplina("Literatura Brasileira", 4, false, alunosLitBr);
+        Disciplina disciplina3 = new Disciplina("Física", 1, true,alunosFisica);
+        Disciplina disciplina4 = new Disciplina("Literatura Brasileira", 4, false,alunosLitBr);
 
         // Criando lista de disciplinas
-        Disciplina[] disciplinas = { disciplina1, disciplina2, disciplina3, disciplina4 };
+        Disciplina[] disciplinas = {disciplina1, disciplina2, disciplina3, disciplina4};
 
         // Criando scanner para ler entrada do usuário
         Scanner scanner = new Scanner(System.in);
@@ -31,8 +31,7 @@ public class App {
 
         // Tela de login
         while (!loggedIn) {
-            System.out.println(
-                    "\n________________________________________________________________________________________________________________________");
+            System.out.println("\n________________________________________________________________________________________________________________________");
             System.out.println("\nBem-vindo!!!!!");
             System.out.println("Vamos fazer login? :)");
             System.out.print("\nDigite seu email: ");
@@ -71,32 +70,24 @@ public class App {
                 System.out.println("3. Ver disciplinas matriculadas");
                 System.out.println("4. Sair");
                 int escolha = scanner.nextInt();
-                scanner.nextLine(); // Consumir nova linha
+                scanner.nextLine();  // Consumir nova linha
 
                 switch (escolha) {
                     case 1:
                         // Exibir disciplinas para matrícula
-                        if (disciplinas == null || disciplinas.length == 0) {
-                            System.out.println("\nNão há disciplinas disponíveis para matrícula.");
-                            break;
-                        }
-
                         System.out.println("\nEscolha uma disciplina para se matricular:");
                         for (int i = 0; i < disciplinas.length; i++) {
                             System.out.println((i + 1) + ". " + disciplinas[i].getNome());
                         }
-
                         int disciplinaEscolhida = scanner.nextInt() - 1;
-                        scanner.nextLine();
-
+                        scanner.nextLine();  // Consumir nova linha
                         if (disciplinaEscolhida >= 0 && disciplinaEscolhida < disciplinas.length) {
                             Disciplina disciplinaSelecionada = disciplinas[disciplinaEscolhida];
-                            ((Aluno) alunoLogado).matricular(disciplinaSelecionada);
+                            disciplinaSelecionada.matricularAluno((Aluno) alunoLogado);
                         } else {
                             System.out.println("Opção inválida.");
                         }
                         break;
-
                     case 2:
                         // Exibir disciplinas para cancelamento
                         System.out.println("\nEscolha uma disciplina para cancelar matrícula:");
@@ -104,7 +95,7 @@ public class App {
                             System.out.println((i + 1) + ". " + disciplinas[i].getNome());
                         }
                         int disciplinaCancelada = scanner.nextInt() - 1;
-                        scanner.nextLine(); // Consumir nova linha
+                        scanner.nextLine();  // Consumir nova linha
                         if (disciplinaCancelada >= 0 && disciplinaCancelada < disciplinas.length) {
                             Disciplina disciplinaSelecionada = disciplinas[disciplinaCancelada];
                             disciplinaSelecionada.cancelarMatricula((Aluno) alunoLogado);
@@ -135,7 +126,7 @@ public class App {
                 System.out.println("1. Verificar alunos em uma disciplina");
                 System.out.println("2. Sair");
                 int escolha = scanner.nextInt();
-                scanner.nextLine(); // Consumir nova linha
+                scanner.nextLine();  // Consumir nova linha
 
                 switch (escolha) {
                     case 1:
@@ -146,8 +137,8 @@ public class App {
                         }
                         int disciplinaEscolhida = scanner.nextInt() - 1;
                         scanner.nextLine();
-                        Disciplina disciplinaSelecionada = disciplinas[disciplinaEscolhida];
-                        professor.consultarAlunos(disciplinaSelecionada);
+                            Disciplina disciplinaSelecionada = disciplinas[disciplinaEscolhida];
+                            professor.consultarAlunos(disciplinaSelecionada);
                         break;
                     case 2:
                         exit = true;
