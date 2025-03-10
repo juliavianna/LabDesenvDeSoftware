@@ -19,15 +19,11 @@ Repositório da matéria de Laboratório de Desenvolvimento de Software da do cu
 **Para que** eu possa acessar minhas informações e fazer alterações.
 
 **Como** aluno,
-**Eu quero** me matricular em até 4 disciplinas obrigatórias,
+**Eu quero** me matricular em até 4 disciplinas obrigatórias e 2 optativas,
 **Para que** eu possa cumprir os requisitos do meu curso.
 
 **Como** aluno,
-**Eu quero** me matricular em até 2 disciplinas optativas,
-**Para que** eu possa complementar minha formação acadêmica.
-
-**Como** aluno,
-**Eu quero** poder me matricular apenas dentro do período de matrículas,
+**Eu quero** me matricular apenas dentro do período de matrículas,
 **Para que** eu possa organizar minha grade de horários conforme o cronograma da universidade.
 
 **Como** aluno,
