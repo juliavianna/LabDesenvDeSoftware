@@ -1,7 +1,12 @@
 ## LabDesenvDeSoftware
 Repositório da matéria de Laboratório de Desenvolvimento de Software da do curso de Engenharia de Software da PUC Minas
 
+# Diagrama de caso de uso
 ![image](https://github.com/user-attachments/assets/b0af62d6-1c93-4e18-9dec-39e02940751a)
+
+# Diagrama de classes
+![image](https://github.com/user-attachments/assets/6b9fc075-9eb4-43b1-ac53-c0ea29d1cc9e)
+
 
 
 
@@ -62,5 +67,5 @@ Repositório da matéria de Laboratório de Desenvolvimento de Software da do cu
 **Para que** eu possa acessar as informações e fazer alterações.
 
 **Como** professor,
-**Eu quero** acessar o sistema para visualizar a lista de alunos matriculados em minhas disciplinas,
+**Eu quero** poder visualizar a lista de alunos matriculados em minhas disciplinas,
 **Para que** eu possa planejar minhas aulas de forma mais eficiente.
