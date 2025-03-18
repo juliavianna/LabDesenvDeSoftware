@@ -1,0 +1,1 @@
+Nesta pasta são apresentados os artefatos do Laboratório 2.
