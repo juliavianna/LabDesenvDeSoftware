@@ -1,9 +1,8 @@
 ## LabDesenvDeSoftware
-Repositório da matéria de Laboratório de Desenvolvimento de Software da do curso de Engenharia de Software da PUC Minas
+Repositório da matéria de Laboratório de Desenvolvimento de Software da do curso de Engenharia de Software da PUC Minas. Acesse:
 
-Acesse:
-- [Laboratório 1](https://github.com/juliavianna/LabDesenvDeSoftware/tree/main/laboratorio1)
-- [Laboratório 2](https://github.com/juliavianna/LabDesenvDeSoftware/tree/main/laboratorio2)
+- [Laboratório 1 - Sistema de Matrículas](https://github.com/juliavianna/LabDesenvDeSoftware/tree/main/laboratorio1)
+- [Laboratório 2 - Sistema de Aluguel de Carros](https://github.com/juliavianna/LabDesenvDeSoftware/tree/main/laboratorio2)
 - Laboratório 3 (em breve)
 - Laboratório 4 (em breve)
 - Laboratório 5 (em breve)
