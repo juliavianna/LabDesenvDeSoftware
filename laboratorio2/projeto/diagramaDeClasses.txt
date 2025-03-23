@@ -1,0 +1,87 @@
+@startuml
+abstract class Usuario {
+- int RG
+- int CPF
+- String nome
+- Endereco endereco
++ void cadastrar(String nome, String rg, String cpf, String endereco, String profissao, List<String> entidadesEmpregadoras, List<Double> rendimentos)
++ boolean autenticar(String cpf, String senha)
+}
+
+class Cliente {
+- int MAX_RENDIMENTOS = 3
+- String profissao
+- Empregador[] empregadores
+- float[] rendimentos
+- List<Pedido> pedidos
++ void criarPedido(Pedido pedido)
++ void modificarPedido(int pedidoId, Pedido novoPedido)
++ Pedido consultarPedido(int pedidoId)
++ void cancelarPedido(int pedidoId)
+}
+
+class Agente {
+- List<Pedido> pedidos
++ void modificarPedido(int pedidoId, Pedido novoPedido)
++ void avaliarPedido(int pedidoId, boolean parecer)
+}
+
+class Pedido {
+- Long id
+- LocalDate dataPedido
+- String status
+- Cliente cliente
+- Agente agente
+- Contrato contrato
+- Automovel automovel  
++ Pedido(int id, Cliente cliente, Automovel automovel, boolean aprovado)
+}
+
+class Automovel {
+    - String matricula
+    - int ano
+    - String marca
+    - String modelo
+    - String placa
+    - String proprietario
+    + Automovel(String matricula, int ano, String marca, String modelo, String placa, String proprietario)
+}
+
+class Endereco {
+- String rua
+- String bairro
+- int numero
+- String complemento
+- String cidade
+- String estado
++ Endereco(String rua, String bairro, int numero, String complemento, String cidade, String estado) 
+}
+
+class Empregador {
+- Long id
+- String nomeEmpresa
+- String enderecoEmpresa
+- Cliente cliente
++ Empregador(Long id, String nomeEmpresa, String enderecoEmpresa)
+}
+
+class Contrato {
+- Long id
+- Pedido pedido
+- String tipoContrato
+- LocalDate dataInicio
+- LocalDate dataFim
+- double valorMensal
+- boolean ativo
++ Contrato(Long id, Pedido pedido, String tipoContrato, LocalDate dataInicio, LocalDate dataFim, double valorMensal, boolean ativo)
+}
+
+Usuario <|-- Cliente
+Usuario <|-- Agente
+Usuario *-- Endereco
+Cliente "1" -- "0..*" Pedido
+Agente "1" -- "0..*" Pedido
+Pedido "1" -- "1" Automovel
+Pedido "1" -- "1" Contrato
+Empregador -- Cliente
+@enduml

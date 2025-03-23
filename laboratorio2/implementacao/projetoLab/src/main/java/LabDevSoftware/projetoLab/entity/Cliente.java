@@ -1,8 +1,13 @@
+package LabDevSoftware.projetoLab.entity;
+
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Cliente extends Usuario {
 
-    private Endereco endereço;
     private String profissao;
     private Empregador[] empregadores;
     private float[] rendimentos;
@@ -11,8 +16,8 @@ public class Cliente extends Usuario {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
 
-    public Cliente() {
-        super();
+    public Cliente(int RG, int CPF, String nome) {
+        super(RG, CPF, nome);
     }
 
     

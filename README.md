@@ -13,6 +13,7 @@ A seguir, são apresentados os artefatos do laboratório atual (Laboratório 2).
 
 
 # Diagrama de classes
+![Diagrama de classes](laboratorio2\projeto\20250323_diagramaClasses.png)
 
 
 # Histórias de Usuário
