@@ -1,0 +1,33 @@
+@startuml name diagramaDeCasoDeUso_1.1
+scale 2
+left to right direction 
+skinparam PackageStyle rect
+actor Usuário
+actor Agente 
+actor Cliente 
+actor Banco
+rectangle sistema{
+    Cliente -> Usuário
+    Agente -> Usuário
+
+    Agente -- (Modificar Pedido)
+
+    Usuário -- (Logar)
+    Usuário -- (Cadastrar)
+
+    Cliente -- (Consultar Pedido)
+    Cliente -- (Cancelar Pedido)
+    Cliente -- (Modificar Pedido)
+    Cliente -- (Criar Pedido)
+
+    Agente -- (Avaliar Pedido)
+    (Criar Pedido) .> (Avaliar Pedido) : include
+    (Avaliar Pedido) .> (Dar Parecer) : include
+    (Dar Parecer) .>  (Executar Contrato) : extends
+    Agente -- (Solicitar Contrato de Crédito)
+
+    (Solicitar Contrato de Crédito) .> (Avaliar Solicitação de Contrato) : include
+    Banco -- (Avaliar Solicitação de Contrato)
+    Banco -- (Conceder contrato de crédito)
+    (Avaliar Solicitação de Contrato) .> (Conceder contrato de crédito) : extend
+}
