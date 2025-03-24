@@ -23,18 +23,18 @@ class Cliente {
 class Agente {
 - List<Pedido> pedidos
 + void modificarPedido(int pedidoId, Pedido novoPedido)
-+ void avaliarPedido(int pedidoId, boolean parecer)
++ void avaliarPedido(Pedido pedido)
 }
 
 class Pedido {
 - Long id
 - LocalDate dataPedido
-- String status
+- boolean parecer
 - Cliente cliente
 - Agente agente
-- Contrato contrato
-- Automovel automovel  
-+ Pedido(int id, Cliente cliente, Automovel automovel, boolean aprovado)
+- Automovel automovel
+- Contrato contrato  
++ Pedido(int id, LocalDate dataPedido, boolean parecer, Cliente cliente, Agente agente, Automovel automovel, Contrato contrato)
 }
 
 class Automovel {
