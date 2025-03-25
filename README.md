@@ -13,7 +13,7 @@ A seguir, são apresentados os artefatos do laboratório atual (Laboratório 2).
 ![Diagrama de casos de uso](laboratorio2/projeto/20250323_diagramaCasosDeUso.png)
 
 # Diagrama de classes
-![Diagrama de classes](laboratorio2/projeto/20250323_diagramaClasses_REV.png)
+![Diagrama de classes](laboratorio2/projeto/20250325_diagramaClasses.png)
 
 # Diagrama de pacotes
 ![Diagrama de pacotes](laboratorio2/projeto/package-diagram.png)
