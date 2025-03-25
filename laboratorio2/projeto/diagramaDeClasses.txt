@@ -40,6 +40,7 @@ class Pedido {
 - Long id
 - LocalDate dataPedido
 - boolean parecer
+- boolean parecer
 - Cliente cliente
 - Agente agente
 - Automovel automovel
