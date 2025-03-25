@@ -1,17 +1,19 @@
 @startuml
 abstract class Usuario {
-- int RG
-- int CPF
+- Long id
 - String nome
 - Endereco endereco
-+ void cadastrar(String nome, String rg, String cpf, String endereco, String profissao, List<String> entidadesEmpregadoras, List<Double> rendimentos)
-+ boolean autenticar(String cpf, String senha)
+- String senha
++ void cadastrar(Long id, String nome, Endereco endereco, String senha)
++ boolean autenticar(String nome, String senha)
 }
 
 class Cliente {
 - int MAX_RENDIMENTOS = 3
+- int RG
+- int CPF
 - String profissao
-- Empregador[] empregadores
+- EntidadeEmpregadora[] empregadores
 - float[] rendimentos
 - List<Pedido> pedidos
 + void criarPedido(Pedido pedido)
@@ -21,9 +23,17 @@ class Cliente {
 }
 
 class Agente {
+- int CNPJ
+- TipoAgente tipo
 - List<Pedido> pedidos
++ Agente(int cnpj, TipoAgente tipo, List<Pedido> pedidos)
 + void modificarPedido(int pedidoId, Pedido novoPedido)
 + void avaliarPedido(Pedido pedido)
+}
+
+enum TipoAgente {
+BANCO 
+EMPRESA
 }
 
 class Pedido {
@@ -33,18 +43,17 @@ class Pedido {
 - Cliente cliente
 - Agente agente
 - Automovel automovel
-- Contrato contrato  
-+ Pedido(int id, LocalDate dataPedido, boolean parecer, Cliente cliente, Agente agente, Automovel automovel, Contrato contrato)
++ Pedido(int id, LocalDate dataPedido, boolean parecer, Cliente cliente, Agente agente, Automovel automovel)
 }
 
 class Automovel {
-    - String matricula
-    - int ano
-    - String marca
-    - String modelo
-    - String placa
-    - String proprietario
-    + Automovel(String matricula, int ano, String marca, String modelo, String placa, String proprietario)
+- String matricula
+- int ano
+- String marca
+- String modelo
+- String placa
+- Usuario proprietario
++ Automovel(String matricula, int ano, String marca, String modelo, String placa, Usuario proprietario)
 }
 
 class Endereco {
@@ -57,12 +66,11 @@ class Endereco {
 + Endereco(String rua, String bairro, int numero, String complemento, String cidade, String estado) 
 }
 
-class Empregador {
+class EntidadeEmpregadora {
 - Long id
-- String nomeEmpresa
-- String enderecoEmpresa
-- Cliente cliente
-+ Empregador(Long id, String nomeEmpresa, String enderecoEmpresa)
+- String nome
+- Endereco endereco
++ EntidadeEmpregadora(Long id, String nome, Endereco endereco)
 }
 
 class Contrato {
@@ -81,7 +89,8 @@ Usuario <|-- Agente
 Usuario *-- Endereco
 Cliente "1" -- "0..*" Pedido
 Agente "1" -- "0..*" Pedido
+Agente -- TipoAgente
 Pedido "1" -- "1" Automovel
 Pedido "1" -- "1" Contrato
-Empregador -- Cliente
+EntidadeEmpregadora -- Cliente
 @enduml
