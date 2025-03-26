@@ -8,20 +8,20 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Empregador {
+public class EntidadeEmpregadora {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nomeEmpresa;
-    private String enderecoEmpresa;
+    private String nome;
+    private String endereco;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    public Empregador(Long id, String nomeEmpresa, String enderecoEmpresa) {
+    public EntidadeEmpregadora(Long id, String nome, String endereco) {
         this.id = id;
-        this.nomeEmpresa = nomeEmpresa;
-        this.enderecoEmpresa = enderecoEmpresa;
+        this.nome = nome;
+        this.endereco = endereco;
     }
 }
