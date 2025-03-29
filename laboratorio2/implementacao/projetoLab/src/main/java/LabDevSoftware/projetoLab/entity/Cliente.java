@@ -1,23 +1,34 @@
 package LabDevSoftware.projetoLab.entity;
 
+import jakarta.persistence.*;
 import java.util.List;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Cliente extends Usuario {
     private final int MAX_RENDIMENTOS = 3;
-    private int rg;
-    private int cpf;
+
+    @Column(name = "rg")
+    private Long rg; // Alterado para Long (ou String, dependendo do caso)
+
+    @Column(name = "cpf")
+    private Long cpf; // Alterado para Long (ou String, dependendo do caso)
+
+    @Column(name = "profissao")
     private String profissao;
-    private EntidadeEmpregadora[] empregadores;
-    private float[] rendimentos;
+
+    @OneToMany(mappedBy = "cliente")  // Removido @JoinColumn aqui
+    private List<EntidadeEmpregadora> empregadores; // Alterado para List<EntidadeEmpregadora>
+
+    @ElementCollection
+    @CollectionTable(name = "rendimentos", joinColumns = @JoinColumn(name = "cliente_id"))
+    @Column(name = "rendimentos")
+    private List<Float> rendimentos; // Alterado para List<Float>
 
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
 
-    public Cliente(Long id, String nome, Endereco endereco, String senha, int rg, int cpf, String profissao, EntidadeEmpregadora[] empregadores, float[] rendimentos) {
-        super(id, nome, endereco, senha);
+    public Cliente(Long id, String nome, Endereco endereco, String senha, Long rg, Long cpf, String profissao, List<EntidadeEmpregadora> empregadores, List<Float> rendimentos) {
+        super(id, nome, endereco, senha); // Chama o construtor da classe pai
         this.rg = rg;
         this.cpf = cpf;
         this.profissao = profissao;
@@ -25,24 +36,52 @@ public class Cliente extends Usuario {
         this.rendimentos = rendimentos;
     }
 
-    public int getRg() {
+    // Getters e Setters
+    public Long getRg() {
         return rg;
     }
 
-    public int getCpf() {
+    public void setRg(Long rg) {
+        this.rg = rg;
+    }
+
+    public Long getCpf() {
         return cpf;
+    }
+
+    public void setCpf(Long cpf) {
+        this.cpf = cpf;
     }
 
     public String getProfissao() {
         return profissao;
     }
 
-    public void setRg(int rg) {
-        this.rg = rg;
-    }
-
     public void setProfissao(String profissao) {
         this.profissao = profissao;
     }
-    
+
+    public List<EntidadeEmpregadora> getEmpregadores() {
+        return empregadores;
+    }
+
+    public void setEmpregadores(List<EntidadeEmpregadora> empregadores) {
+        this.empregadores = empregadores;
+    }
+
+    public List<Float> getRendimentos() {
+        return rendimentos;
+    }
+
+    public void setRendimentos(List<Float> rendimentos) {
+        this.rendimentos = rendimentos;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 }
