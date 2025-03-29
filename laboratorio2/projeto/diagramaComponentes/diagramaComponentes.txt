@@ -1,5 +1,4 @@
 @startuml
-
 [Navegador]
 interface IFrontend
 interface IApiBackend
@@ -18,16 +17,18 @@ folder "Backend" {
 }
 
 [Navegador] ..> IFrontend : TCP/IP
-IFrontend - Frontend
+IFrontend - [ServiceFrontend]
+[ServiceFrontend] ..> [ModelFrontend] 
+[ModelFrontend] ..> [RepositoryFrontend]
 [RepositoryFrontend] ..> IApiBackend : REST/API
-IApiBackend - Backend
+IApiBackend - [ControllerBackend]
 [ControllerBackend] ..> [ServiceBackend]
+[ServiceBackend] ..> [ModelBackend]
 [ServiceBackend] ..> [RepositoryBackend]
 
 interface IDatabase
 [Database] 
 
 [RepositoryBackend] ..> IDatabase : TCP/IP
-IDatabase - [Database] 
-
+IDatabase - [Database]
 @enduml
