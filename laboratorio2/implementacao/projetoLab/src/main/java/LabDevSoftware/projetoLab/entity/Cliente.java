@@ -27,6 +27,10 @@ public class Cliente extends Usuario {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
 
+    public Cliente(){
+        super();
+    }
+
     public Cliente(Long id, String nome, Endereco endereco, String senha, Long rg, Long cpf, String profissao, List<EntidadeEmpregadora> empregadores, List<Float> rendimentos) {
         super(id, nome, endereco, senha); // Chama o construtor da classe pai
         this.rg = rg;

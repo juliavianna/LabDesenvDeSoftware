@@ -1,5 +1,6 @@
 package LabDevSoftware.projetoLab.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "entidade_empregadora")
 public class EntidadeEmpregadora {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,7 +23,7 @@ public class EntidadeEmpregadora {
     @Column(name = "nome")
     private String nome;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id")
     private Endereco endereco;
 
