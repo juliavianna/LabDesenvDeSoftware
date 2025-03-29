@@ -1,70 +1,54 @@
-@startuml name package-Diagram
-  left to right direction
-
-  skinparam linetype ortho
-  skinparam packageStyle rectangle
-  skinparam nodesep 50
-  skinparam ranksep 80
-
-package "LocationSystem" {
-    package "Frontend" {
-        package "UI" {
-        class HomePage
-        class CadastroPage
-        class PedidoPage
-        }
-
-        package "Controllers" {      
-        class UsuarioController
-        class AutomovelController
-        class PedidoController
-        class ContratoController  
-        }
+@startuml
+package "SistemaLocacao" {
+  
+  package "Frontend" {
+    package "UI" {
+      package HomePage{}
+      package CadastroPage{}
+      package PedidoPage{}
     }
+
+    package "Controllers" {
+      package PedidoController{}
+      package UsuarioController{}
+      package AutomovelController{}
+      package ContratoController{}  
+    }
+  }
 
   package "Backend" {
     package "Services" {
-      class UsuarioService
-      class AutomovelService
-      class PedidoService
-      class ContratoService
+      package PedidoService{}
+      package ContratoService{}
+      package UsuarioService{}
+      package AutomovelService{}
     }
 
     package "Repositories" {
-      class UsuarioRepository
-      class AutomovelRepository
-      class PedidoRepository
-      class ContratoRepository
+      package PedidoRepository{}
+      package ContratoRepository{}
+      package UsuarioRepository{}
+      package AutomovelRepository{}
     }
 
     package "Models" {
-      class Automovel
-      class Pedido
-      class Cliente
-      class Contrato
-      class Agente
-      class Empresa
-      class Banco
+      package Pedido{}
+      package Contrato{}
+      package Cliente{}
+      package Agente{}
+      package Automovel{}
+      package Empresa{}
+      package Banco{}
     }
   }
 
-    package "Database" {
-    class MySQLDatabase
-    class AutomovelTable
-    class PedidoTable
-    class ContratoTable
-    class ClienteTable
-    class AgenteTable
-    class EmpresaTable   
-    class BancoTable
-  }
 }
 
-' Relacionamentos (forçados para a parte inferior)
+' Relacionamentos
 Frontend.Controllers -- Backend.Services
 Backend.Services -- Backend.Repositories
-Backend.Repositories - Database.MySQLDatabase
-Backend.Repositories ..> Backend.Models
+Backend.Repositories --> Backend.Models
+
 
 @enduml
 
