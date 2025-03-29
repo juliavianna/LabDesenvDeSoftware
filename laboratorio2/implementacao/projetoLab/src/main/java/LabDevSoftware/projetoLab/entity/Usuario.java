@@ -1,4 +1,5 @@
 package LabDevSoftware.projetoLab.entity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,12 +21,14 @@ public abstract class Usuario {
     @Column(name = "nome")
     private String nome;
 
-    @OneToOne
-    @JoinColumn(name = "id")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
     @Column(name = "senha")
     private String senha;
+
+    public Usuario(){}
 
     public Usuario(Long id, String nome, Endereco endereco, String senha) {
         this.id = id;
