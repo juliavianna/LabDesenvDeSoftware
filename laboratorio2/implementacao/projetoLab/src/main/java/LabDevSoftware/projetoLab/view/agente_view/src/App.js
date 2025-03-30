@@ -1,66 +1,79 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { getAgentes, getAgenteById, createAgente } from "./services/APIService";
+import "./App.css";
 
 function App() {
-
   const [agentes, setAgentes] = useState([]);
-  // buscando agentes do backend
+  const [agenteId, setAgenteId] = useState("");
+  const [agente, setAgente] = useState(null);
+  const [error, setError] = useState("");
+
+  // Buscar todos os agentes ao carregar o componente
   useEffect(() => {
-    fetch('/agentes') 
-      .then((response) => response.json())
+    getAgentes()
       .then((data) => setAgentes(data))
-      .catch((error) => console.error('Erro ao buscar agentes:', error));
+      .catch((err) => console.error("Erro ao buscar agentes:", err));
   }, []);
 
-  const [agenteId, setAgenteId] = useState('');
-  const [agente, setAgente] = useState(null);
-  const [error, setError] = useState('');
+  // Buscar um agente pelo ID
+  const buscarAgente = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await getAgenteById(agenteId);
+      setAgente(data);
+      setError("");
+    } catch (err) {
+      setAgente(null);
+      setError("Agente não encontrado");
+    }
+  };
 
-  // buscando agente pelo ID
-  const buscarAgente = (e) => {
-    e.preventDefault(); 
-    fetch(`/agentes/${agenteId}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Agente não encontrado');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setAgente(data);
-        setError('');
-      })
-      .catch((err) => {
-        setAgente(null);
-        setError(err.message);
-      });
-    };
+  // Criar novo agente
+  const cadastrarAgente = async (e) => {
+    e.preventDefault();
+    const nome = e.target.nome.value;
+    const email = e.target.email.value;
+
+    const novoAgente = { nome, email };
+    
+    try {
+      const data = await createAgente(novoAgente);
+      setAgentes([...agentes, data]);
+      alert("Agente cadastrado com sucesso!");
+    } catch (err) {
+      console.error("Erro ao cadastrar agente:", err);
+    }
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>LAB DESENVOLVIMENTO DE SOFTWARE</h1>
-        <form>
-        <div>
-          <label htmlFor="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" placeholder="Digite o nome" />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" placeholder="Digite o email" />
-        </div>
-        <button type="submit">Enviar</button>
-      </form>
-         <ul>
+
+        <h2>Cadastrar Agente</h2>
+        <form onSubmit={cadastrarAgente}>
+          <div>
+            <label htmlFor="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required placeholder="Digite o nome" />
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Digite o email" />
+          </div>
+          <button type="submit">Cadastrar</button>
+        </form>
+
+        <h2>Lista de Agentes</h2>
+        <ul>
           {agentes.map((agente) => (
             <li key={agente.id}>
               <strong>Nome:</strong> {agente.nome} <br />
               <strong>Email:</strong> {agente.email}
             </li>
           ))}
-        </ul> 
+        </ul>
 
-        <h1>Buscar Agente</h1>
+        <h2>Buscar Agente</h2>
         <form onSubmit={buscarAgente}>
           <div>
             <label htmlFor="agenteId">ID do Agente:</label>
@@ -75,7 +88,6 @@ function App() {
           <button type="submit">Buscar</button>
         </form>
 
-        {/* Exibe o agente encontrado ou mensagem de erro */}
         {agente && (
           <div>
             <h2>Detalhes do Agente</h2>
@@ -84,12 +96,9 @@ function App() {
             <p><strong>Email:</strong> {agente.email}</p>
           </div>
         )}
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </header>
     </div>
-
-    
   );
 }
 
