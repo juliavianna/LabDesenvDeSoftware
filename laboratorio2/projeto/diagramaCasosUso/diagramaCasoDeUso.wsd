@@ -10,24 +10,31 @@ rectangle sistema{
     Cliente -> Usuário
     Agente -> Usuário
 
-    Agente -- (Modificar Pedido)
-
     Usuário -- (Logar)
     Usuário -- (Cadastrar)
+    Usuário -- (Modificar Pedido)
+
+    Agente -- (Avaliar Pedido)
 
     Cliente -- (Consultar Pedido)
     Cliente -- (Cancelar Pedido)
-    Cliente -- (Modificar Pedido)
     Cliente -- (Criar Pedido)
 
-    Agente -- (Avaliar Pedido)
+    
+
     (Criar Pedido) .> (Avaliar Pedido) : include
     (Avaliar Pedido) .> (Dar Parecer) : include
-    (Dar Parecer) .>  (Executar Contrato) : extends
+    (Dar Parecer) <.  (Executar Contrato) : extends
+    (Dar Parecer) <.  (Não Executar Contrato) : extends
     Agente -- (Solicitar Contrato de Crédito)
 
     (Solicitar Contrato de Crédito) .> (Avaliar Solicitação de Contrato) : include
+    
     Banco -- (Avaliar Solicitação de Contrato)
-    Banco -- (Conceder contrato de crédito)
-    (Avaliar Solicitação de Contrato) .> (Conceder contrato de crédito) : extend
+    (Reprovar contrato de crédito)
+    
+    (Avaliar Solicitação de Contrato) <. (Conceder contrato de crédito) : extend
+    (Avaliar Solicitação de Contrato) <. (Reprovar contrato de crédito) : extend 
+    ''essa ultima linha que está atrapalhando o diagrama 
+    
 }
