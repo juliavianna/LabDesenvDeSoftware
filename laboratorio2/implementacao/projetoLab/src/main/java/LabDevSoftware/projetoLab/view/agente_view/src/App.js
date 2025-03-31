@@ -7,6 +7,8 @@ function App() {
   const [agenteId, setAgenteId] = useState("");
   const [agente, setAgente] = useState(null);
   const [error, setError] = useState("");
+  const [isEditOpen, setIsEditOpen] = useState(false); // Estado para controlar o colapso
+
 
   // Buscar todos os agentes ao carregar o componente
   useEffect(() => {
@@ -28,14 +30,20 @@ function App() {
     }
   };
 
+
+  const toggleEdit = () => {
+    setIsEditOpen(!isEditOpen);
+  };
+
   // Atualizar Agenteeee
 const atualizarAgente = async (e) => {
   e.preventDefault();
   const id = e.target.id.value;
   const nome = e.target.nome.value;
   const email = e.target.email.value;
+  const senha = e.target.senha.value;
 
-  const agenteAtualizado = { nome, email };
+  const agenteAtualizado = { nome, email, senha };
 
   try {
     const data = await updateAgente(id, agenteAtualizado);
@@ -86,14 +94,16 @@ const deletarAgente = async (id) => {
     } catch (err) {
       console.error("Erro ao cadastrar agente:", err);
     }
+
   };
 
+  
   return (
     <div className="App">
       <header className="App-header">
         <h1>LAB DESENVOLVIMENTO DE SOFTWARE</h1>
 
-        <h2>Cadastrar Agente</h2>
+        <h2>---Cadastrar Agente---</h2>
         <form onSubmit={cadastrarAgente}>
           <div>
             <label htmlFor="nome">Nome:</label>
@@ -139,17 +149,34 @@ const deletarAgente = async (id) => {
           <button type="submit">Cadastrar</button>
         </form>
 
-        <h2>Lista de Agentes</h2>
-        <ul>
-          {agentes.map((agente) => (
-            <li key={agente.id}>
-              <strong>Nome:</strong> {agente.nome} <br />
-              <strong>Email:</strong> {agente.email}
-            </li>
-          ))}
-        </ul>
+         <button className="collapsible" onClick={toggleEdit}>
+          {isEditOpen ? "Fechar Edição" : "Editar Agente Existente"}
+        </button>
 
-        <h2>Buscar Agente</h2>
+        {isEditOpen && (
+          <div className="content">
+            <form onSubmit={atualizarAgente}>
+              <div>
+                <label htmlFor="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required placeholder="Atualize o nome" />
+              </div>
+              <div>
+                <label htmlFor="senha">Senha:</label>
+                <input type="senha" id="senha" name="senha" required placeholder="Atualize a senha" />
+              </div>
+              <div>
+                <label htmlFor="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Atualize o email" />
+              </div>
+              <button type="submit">Atualizar</button>
+            </form>
+          </div>
+        )}
+
+  
+
+       
+        <h2>---Buscar Agente---</h2>
         <form onSubmit={buscarAgente}>
           <div>
             <label htmlFor="agenteId">ID do Agente:</label>
@@ -166,13 +193,44 @@ const deletarAgente = async (id) => {
 
         {agente && (
           <div>
-            <h2>Detalhes do Agente</h2>
+            <h2>---Detalhes do Agente---</h2>
             <p><strong>ID:</strong> {agente.id}</p>
             <p><strong>Nome:</strong> {agente.nome}</p>
             <p><strong>Email:</strong> {agente.email}</p>
           </div>
         )}
         {error && <p style={{ color: "red" }}>{error}</p>}
+
+        <h2>---Deletar Agente---</h2>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            deletarAgente(agenteId);
+          }}
+        >
+          <div>
+            <label htmlFor="agenteIdDeletar">ID do Agente:</label>
+            <input
+              type="text"
+              id="agenteIdDeletar"
+              value={agenteId}
+              onChange={(e) => setAgenteId(e.target.value)}
+              placeholder="Digite o ID do agente para deletar"
+            />
+          </div>
+          <button type="submit">Deletar</button>
+        </form>
+
+        <h2>---Lista de Agentes---</h2>
+        <ul>
+          {agentes.map((agente) => (
+            <li key={agente.id}>
+              <strong>Nome:</strong> {agente.nome} <br />
+              <strong>Email:</strong> {agente.email}
+            </li>
+          ))}
+        </ul>
+
       </header>
     </div>
   );

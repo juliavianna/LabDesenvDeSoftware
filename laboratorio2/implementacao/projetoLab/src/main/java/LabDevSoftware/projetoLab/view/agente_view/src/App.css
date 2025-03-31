@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #7d8189;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,3 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
+  .collapsible {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+    padding: 10px;
+  }
+
+  .collapsible::after {
+    content: ">";
+    font-size: 16px;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+    color: #fffefe
+  }
+
+  .collapsible.active::after {
+    transform: rotate(90deg);
+  }
+
+  .content {
+    display: block;
+    padding: 10px;
+    border: 1px solid #fffefe;
+    margin-top: 10px;
+  }
+
+  .content.open {
+    max-height: 200px; /* Ajuste conforme necessário */
+  }
+
