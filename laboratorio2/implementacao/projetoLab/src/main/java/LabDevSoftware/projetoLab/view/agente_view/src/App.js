@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAgentes, getAgenteById, createAgente, updateAgente, deleteAgente } from "./services/APIService";
+import { getAgentes, getAgenteById, createAgente, createEnderecoAgente, updateAgente, deleteAgente } from "./services/APIService";
 import "./App.css";
 
 function App() {
@@ -67,12 +67,21 @@ const deletarAgente = async (id) => {
     e.preventDefault();
     const nome = e.target.nome.value;
     const email = e.target.email.value;
+    const senha = e.target.senha.value;
+    const cnpj = e.target.cnpj.value;
+    const bairro = e.target.bairro.value;
+    const cidade = e.target.cidade.value;
+    const complemento = e.target.complemento.value;
+    const estado = e.target.estado.value;
+    const numero = e.target.numero.value;
+    const rua = e.target.rua.value;
 
-    const novoAgente = { nome, email };
-    
+    const novoAgente = { nome, email, senha, cnpj };
+    const enderecoAgente = {bairro, cidade, complemento, estado, numero, rua};
     try {
       const data = await createAgente(novoAgente);
-      setAgentes([...agentes, data]);
+      const endAgente = await createEnderecoAgente(enderecoAgente);
+      setAgentes([...agentes, data, endAgente]);
       alert("Agente cadastrado com sucesso!");
     } catch (err) {
       console.error("Erro ao cadastrar agente:", err);
@@ -93,6 +102,39 @@ const deletarAgente = async (id) => {
           <div>
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" name="email" required placeholder="Digite o email" />
+          </div>
+          <div>
+            <label htmlFor="senha">Senha:</label>
+            <input type="text" id="senha" name="senha" required placeholder="Digite a senha" />
+          </div>
+          <div>
+            <label htmlFor="cnpj">Cnpj:</label>
+            <input type="cnpj" id="cnpj" name="cnpj" required placeholder="Digite o CNPJ" />
+          </div>
+          <div>
+            <h6>Endereço:</h6>
+            <label htmlFor="bairro">Bairro:</label>
+            <input type="bairro" id="bairro" name="bairro" required placeholder="Digite o bairro" />
+          </div>
+          <div>
+            <label htmlFor="cidade">Cidade:</label>
+            <input type="cidade" id="cidade" name="cidade" required placeholder="Digite a cidade" />
+          </div>
+          <div>
+            <label htmlFor="complemento">Complemento:</label>
+            <input type="complemento" id="complemento" name="complemento" required placeholder="Digite o complemento" />
+          </div>
+          <div>
+            <label htmlFor="estado">Estado:</label>
+            <input type="estado" id="estado" name="estado" required placeholder="Digite o estado" />
+          </div>
+          <div>
+            <label htmlFor="numero">Numero:</label>
+            <input type="numero" id="numero" name="numero" required placeholder="Digite o numero" />
+          </div>
+          <div>
+            <label htmlFor="rua">Rua:</label>
+            <input type="rua" id="rua" name="rua" required placeholder="Digite a rua" />
           </div>
           <button type="submit">Cadastrar</button>
         </form>

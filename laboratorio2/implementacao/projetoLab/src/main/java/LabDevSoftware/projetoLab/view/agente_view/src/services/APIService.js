@@ -25,3 +25,8 @@ export async function updateAgente(id, agente) {
 export async function deleteAgente(id) {
     await axios.delete(`${API_URL}/agentes/${id}`);
 }
+
+export async function createEnderecoAgente(enderecoAgente) {
+    const response = await axios.post(`${API_URL}/agentes`, enderecoAgente);
+    return response.data;
+}
