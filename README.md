@@ -20,7 +20,7 @@ A seguir, são apresentados os artefatos do laboratório atual (Laboratório 2).
 ![Diagrama de pacotes](laboratorio2/projeto/diagramaPacotes/package-diagram.png)
 
 # Diagrama de componentes
-![Diagrama de componentes](laboratorio2/projeto/diagramaComponentes/diagramaComponentes.png)
+![Diagrama de componentes](laboratorio2/projeto/diagramaComponentes/202503_DiagramaComponentes.png)
 
 # Histórias de Usuário
 
