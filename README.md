@@ -10,7 +10,8 @@ Repositório da matéria de Laboratório de Desenvolvimento de Software da do cu
 A seguir, são apresentados os artefatos do laboratório atual (Laboratório 2).
 
 # Diagrama de caso de uso
-![Diagrama de casos de uso](laboratorio2/projeto/diagramaCasosUso/20250323_diagramaCasosDeUso.png)
+![image](https://github.com/user-attachments/assets/63fb15eb-1019-44db-b219-ecbf8da15e98)
+
 
 # Diagrama de classes
 ![Diagrama de classes](laboratorio2/projeto/diagramaClasses/20250325_diagramaClasses.png)
