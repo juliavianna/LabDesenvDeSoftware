@@ -40,10 +40,9 @@ const atualizarAgente = async (e) => {
   e.preventDefault();
   const id = e.target.id.value;
   const nome = e.target.nome.value;
-  const email = e.target.email.value;
   const senha = e.target.senha.value;
 
-  const agenteAtualizado = { nome, email, senha };
+  const agenteAtualizado = { nome, senha };
 
   try {
     const data = await updateAgente(id, agenteAtualizado);
@@ -74,7 +73,6 @@ const deletarAgente = async (id) => {
   const cadastrarAgente = async (e) => {
     e.preventDefault();
     const nome = e.target.nome.value;
-    const email = e.target.email.value;
     const senha = e.target.senha.value;
     const cnpj = e.target.cnpj.value;
     const bairro = e.target.bairro.value;
@@ -84,7 +82,7 @@ const deletarAgente = async (id) => {
     const numero = e.target.numero.value;
     const rua = e.target.rua.value;
 
-    const novoAgente = { nome, email, senha, cnpj };
+    const novoAgente = { nome, senha, cnpj };
     const enderecoAgente = {bairro, cidade, complemento, estado, numero, rua};
     try {
       const data = await createAgente(novoAgente);
@@ -103,15 +101,11 @@ const deletarAgente = async (id) => {
       <header className="App-header">
         <h1>LAB DESENVOLVIMENTO DE SOFTWARE</h1>
 
-        <h2>---Cadastrar Agente---</h2>
+        <h2>---Cadastrar Usuário---</h2>
         <form onSubmit={cadastrarAgente}>
           <div>
             <label htmlFor="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required placeholder="Digite o nome" />
-          </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" required placeholder="Digite o email" />
           </div>
           <div>
             <label htmlFor="senha">Senha:</label>
@@ -150,7 +144,7 @@ const deletarAgente = async (id) => {
         </form>
 
          <button className="collapsible" onClick={toggleEdit}>
-          {isEditOpen ? "Fechar Edição" : "Editar Agente Existente"}
+          {isEditOpen ? "Fechar Edição" : "Editar Usuário Existente"}
         </button>
 
         {isEditOpen && (
@@ -164,10 +158,6 @@ const deletarAgente = async (id) => {
                 <label htmlFor="senha">Senha:</label>
                 <input type="senha" id="senha" name="senha" required placeholder="Atualize a senha" />
               </div>
-              <div>
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" required placeholder="Atualize o email" />
-              </div>
               <button type="submit">Atualizar</button>
             </form>
           </div>
@@ -176,16 +166,16 @@ const deletarAgente = async (id) => {
   
 
        
-        <h2>---Buscar Agente---</h2>
+        <h2>---Buscar Usuário---</h2>
         <form onSubmit={buscarAgente}>
           <div>
-            <label htmlFor="agenteId">ID do Agente:</label>
+            <label htmlFor="agenteId">ID do Usuário:</label>
             <input
               type="text"
               id="agenteId"
               value={agenteId}
               onChange={(e) => setAgenteId(e.target.value)}
-              placeholder="Digite o ID do agente"
+              placeholder="Digite o ID do Usuário"
             />
           </div>
           <button type="submit">Buscar</button>
@@ -193,15 +183,14 @@ const deletarAgente = async (id) => {
 
         {agente && (
           <div>
-            <h2>---Detalhes do Agente---</h2>
+            <h2>---Detalhes do Usuário---</h2>
             <p><strong>ID:</strong> {agente.id}</p>
             <p><strong>Nome:</strong> {agente.nome}</p>
-            <p><strong>Email:</strong> {agente.email}</p>
           </div>
         )}
         {error && <p style={{ color: "red" }}>{error}</p>}
 
-        <h2>---Deletar Agente---</h2>
+        <h2>---Deletar Usuário---</h2>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -209,24 +198,23 @@ const deletarAgente = async (id) => {
           }}
         >
           <div>
-            <label htmlFor="agenteIdDeletar">ID do Agente:</label>
+            <label htmlFor="agenteIdDeletar">ID do Usuário:</label>
             <input
               type="text"
               id="agenteIdDeletar"
               value={agenteId}
               onChange={(e) => setAgenteId(e.target.value)}
-              placeholder="Digite o ID do agente para deletar"
+              placeholder="Digite o ID do Usuário para deletar"
             />
           </div>
           <button type="submit">Deletar</button>
         </form>
 
-        <h2>---Lista de Agentes---</h2>
+        <h2>---Lista de Usuários---</h2>
         <ul>
           {agentes.map((agente) => (
             <li key={agente.id}>
               <strong>Nome:</strong> {agente.nome} <br />
-              <strong>Email:</strong> {agente.email}
             </li>
           ))}
         </ul>
