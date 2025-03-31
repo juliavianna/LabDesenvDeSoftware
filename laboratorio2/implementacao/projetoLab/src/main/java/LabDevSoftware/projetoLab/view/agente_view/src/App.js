@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAgentes, getAgenteById, createAgente } from "./services/APIService";
+import { getAgentes, getAgenteById, createAgente, updateAgente, deleteAgente } from "./services/APIService";
 import "./App.css";
 
 function App() {
@@ -27,6 +27,40 @@ function App() {
       setError("Agente não encontrado");
     }
   };
+
+  // Atualizar Agenteeee
+const atualizarAgente = async (e) => {
+  e.preventDefault();
+  const id = e.target.id.value;
+  const nome = e.target.nome.value;
+  const email = e.target.email.value;
+
+  const agenteAtualizado = { nome, email };
+
+  try {
+    const data = await updateAgente(id, agenteAtualizado);
+    const novosAgentes = agentes.map((agente) =>
+      agente.id === id ? data : agente
+    );
+    setAgentes(novosAgentes);
+    alert("Agente atualizado com sucesso!");
+  } catch (err) {
+    console.error("Erro ao atualizar agente:", err);
+  }
+};
+
+// Deletar Agente
+const deletarAgente = async (id) => {
+  try {
+    await deleteAgente(id);
+    const novosAgentes = agentes.filter((agente) => agente.id !== id);
+    setAgentes(novosAgentes);
+    alert("Agente deletado com sucesso!");
+  } catch (err) {
+    console.error("Erro ao deletar agente:", err);
+  }
+};
+
 
   // Criar novo agente
   const cadastrarAgente = async (e) => {
