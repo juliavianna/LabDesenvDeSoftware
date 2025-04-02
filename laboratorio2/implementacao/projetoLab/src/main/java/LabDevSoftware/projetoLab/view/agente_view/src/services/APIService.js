@@ -26,7 +26,26 @@ export async function deleteAgente(id) {
     await axios.delete(`${API_URL}/agentes/${id}`);
 }
 
-export async function createEnderecoAgente(enderecoAgente) {
-    const response = await axios.post(`${API_URL}/agentes`, enderecoAgente);
+export async function getClientes() {
+    const response = await axios.get(`${API_URL}/clientes`);
     return response.data;
+}
+
+export async function getClienteById(id) {
+    const response = await axios.get(`${API_URL}/clientes/${id}`);
+    return response.data;
+}
+
+export async function createCliente(cliente) {
+    const response = await axios.post(`${API_URL}/clientes`, cliente);
+    return response.data;
+}
+
+export async function updateCliente(id, cliente) {
+    const response = await axios.put(`${API_URL}/agentes/${id}`, cliente);
+    return response.data;
+}
+
+export async function deleteCliente(id) {
+    await axios.delete(`${API_URL}/clientes/${id}`);
 }
