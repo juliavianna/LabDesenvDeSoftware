@@ -3,32 +3,36 @@
 interface IFrontend
 interface IApiBackend
 
-folder "Frontend" {
-[RepositoryFrontend]
-[ModelFrontend]
-[ServiceFrontend]
+folder "AplicacaoWeb" {
+[Front-end]
 }
 
-folder "Backend" {
-[ControllerBackend]
-[ServiceBackend]
-[ModelBackend]
-[RepositoryBackend]
+folder "ServidorAplicacao" {
+[AutenticacaoUsuario]
+[RegistroAutomovel]
+[GestaoPedidosAluguel]
+[AvaliacaoPedidos]
+[GestaoContrato]
 }
+
+[AutenticacaoUsuario] ..> [RegistroAutomovel]
+[AutenticacaoUsuario] ..> [GestaoPedidosAluguel]
+[GestaoPedidosAluguel] ..> [AvaliacaoPedidos]
+[AvaliacaoPedidos] ..> [GestaoContrato]
 
 [Navegador] ..> IFrontend : TCP/IP
-IFrontend - [ServiceFrontend]
-[ServiceFrontend] ..> [ModelFrontend] 
-[ModelFrontend] ..> [RepositoryFrontend]
-[RepositoryFrontend] ..> IApiBackend : REST/API
-IApiBackend - [ControllerBackend]
-[ControllerBackend] ..> [ServiceBackend]
-[ServiceBackend] ..> [ModelBackend]
-[ServiceBackend] ..> [RepositoryBackend]
+IFrontend - [Front-end]
+[Front-end] ..> IApiBackend : REST/API
+IApiBackend - [AutenticacaoUsuario]
+
 
 interface IDatabase
 [Database] 
 
-[RepositoryBackend] ..> IDatabase : TCP/IP
+[AutenticacaoUsuario] ..> IDatabase : TCP/IP
+[RegistroAutomovel] ..> IDatabase : TCP/IP
+[GestaoPedidosAluguel] ..> IDatabase : TCP/IP
+[AvaliacaoPedidos] ..> IDatabase : TCP/IP
+[GestaoContrato] ..> IDatabase : TCP/IP
 IDatabase - [Database]
 @enduml
