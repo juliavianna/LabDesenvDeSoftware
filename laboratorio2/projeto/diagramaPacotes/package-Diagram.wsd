@@ -8,20 +8,21 @@ package "SistemaLocacao" {
       package PedidoPage{}
     }
 
-    package "Controllers" {
-      package PedidoController{}
-      package UsuarioController{}
-      package AutomovelController{}
-      package ContratoController{}  
-    }
-  }
-
-  package "Backend" {
     package "Services" {
       package PedidoService{}
       package ContratoService{}
       package UsuarioService{}
       package AutomovelService{}
+    }
+  }
+
+  package "Backend" {
+
+    package "Controllers" {
+      package PedidoController{}
+      package UsuarioController{}
+      package AutomovelController{}
+      package ContratoController{}  
     }
 
     package "Repositories" {
