@@ -4,31 +4,32 @@ abstract class Usuario {
 - String nome
 - Endereco endereco
 - String senha
-+ void cadastrar(Long id, String nome, Endereco endereco, String senha)
-+ boolean autenticar(String nome, String senha)
+- List<Pedido> pedidos
++ Usuario(Long id, String nome, Endereco endereco, String senha, List<Pedido> pedidos)
++ void realizarCadastro(Long id, String nome, Endereco endereco, String senha)
++ boolean realizarLogin(String nome, String senha)
++ void modificarPedido(int pedidoId, Pedido novoPedido)
++ Pedido consultarPedido(int pedidoId)
 }
 
 class Cliente {
 - int MAX_RENDIMENTOS = 3
-- int RG
-- int CPF
+- String RG
+- String CPF
 - String profissao
 - EntidadeEmpregadora[] empregadores
 - float[] rendimentos
-- List<Pedido> pedidos
++ Cliente(String RG, String CPF, String profissao, EntidadeEmpregadora[] empregadores, float[] rendimentos, List<Pedido> pedidos)
 + void criarPedido(Pedido pedido)
-+ void modificarPedido(int pedidoId, Pedido novoPedido)
-+ Pedido consultarPedido(int pedidoId)
 + void cancelarPedido(int pedidoId)
 }
 
 class Agente {
-- int CNPJ
+- String CNPJ
 - TipoAgente tipo
-- List<Pedido> pedidos
-+ Agente(int cnpj, TipoAgente tipo, List<Pedido> pedidos)
-+ void modificarPedido(int pedidoId, Pedido novoPedido)
++ Agente(String cnpj, TipoAgente tipo, List<Pedido> pedidos)
 + void avaliarPedido(Pedido pedido)
++ Contrato executarContrato(Pedido pedido)
 }
 
 enum TipoAgente {
