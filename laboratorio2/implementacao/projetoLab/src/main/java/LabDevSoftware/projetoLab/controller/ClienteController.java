@@ -33,10 +33,6 @@ public class ClienteController {
         return clienteService.listarTodos();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscarCliente(@PathVariable Long id) {
-        return clienteService.buscarPorId(id);
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
@@ -46,6 +42,10 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deletarCliente(@PathVariable Long id) {
         return clienteService.deletar(id);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> buscarClientePorId(@PathVariable Long id) {
+        return clienteService.buscarPorId(id);
     }
 
 }
