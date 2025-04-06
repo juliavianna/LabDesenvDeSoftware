@@ -2,6 +2,7 @@ package LabDevSoftware.projetoLab.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,8 +36,8 @@ public class Pedido {
     @JoinColumn(name = "agente_id")  // Renomeado para uma chave estrangeira mais específica
     private Agente agente;
 
-    @OneToOne
-    @JoinColumn(name = "contrato_id")  // Renomeado para uma chave estrangeira mais específica
+    @OneToOne(optional = true)
+    @JoinColumn(name = "contrato_id", nullable = true) // Renomeado para uma chave estrangeira mais específica
     private Contrato contrato;
 
     @OneToOne
