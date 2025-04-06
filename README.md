@@ -22,6 +22,9 @@ A seguir, são apresentados os artefatos do laboratório atual (Laboratório 2).
 # Diagrama de componentes
 ![Diagrama de componentes](laboratorio2/projeto/diagramaComponentes/202503_DiagramaComponentes.png)
 
+# Diagrama de implantação
+![Diagrama de implantação](laboratorio2/projeto/diagramaDeImplantacao/implantation-diagram.png)
+
 # Histórias de Usuário
 
 **Como** usuário,  
