@@ -1,4 +1,5 @@
 @startuml
+left to right direction
 [Navegador]
 interface IFrontend
 interface IApiBackend
@@ -25,14 +26,26 @@ IFrontend - [Front-end]
 [Front-end] ..> IApiBackend : REST/API
 IApiBackend - [AutenticacaoUsuario]
 
+database SQL {
+[TabelaUsuario]
+[TabelaPedido]
+[TabelaContrato]
+[TabelaAutomovel]
+}
 
-interface IDatabase
-[Database] 
+interface ITabelaUsuario
+interface ITabelaPedido
+interface ITabelaContrato
+interface ITabelaAutomovel
 
-[AutenticacaoUsuario] ..> IDatabase : TCP/IP
-[RegistroAutomovel] ..> IDatabase : TCP/IP
-[GestaoPedidosAluguel] ..> IDatabase : TCP/IP
-[AvaliacaoPedidos] ..> IDatabase : TCP/IP
-[GestaoContrato] ..> IDatabase : TCP/IP
-IDatabase - [Database]
+[AutenticacaoUsuario] ..> ITabelaUsuario : TCP/IP
+[RegistroAutomovel] ..> ITabelaAutomovel : TCP/IP
+[GestaoPedidosAluguel] ..> ITabelaPedido : TCP/IP
+[AvaliacaoPedidos] ..> ITabelaPedido : TCP/IP
+[GestaoContrato] ..> ITabelaContrato : TCP/IP
+
+ITabelaUsuario - [TabelaUsuario]
+ITabelaAutomovel - [TabelaAutomovel]
+ITabelaPedido - [TabelaPedido]
+ITabelaContrato - [TabelaContrato]
 @enduml

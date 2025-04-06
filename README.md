@@ -10,75 +10,64 @@ Repositório da matéria de Laboratório de Desenvolvimento de Software da do cu
 A seguir, são apresentados os artefatos do laboratório atual (Laboratório 2).
 
 # Diagrama de caso de uso
-![image](https://github.com/user-attachments/assets/63fb15eb-1019-44db-b219-ecbf8da15e98)
-
+![Diagrama de caso de uso](laboratorio2/projeto/diagramaCasosUso/20250406_diagramaCasosDeUso.png)
 
 # Diagrama de classes
-![Diagrama de classes](laboratorio2/projeto/diagramaClasses/20250325_diagramaClasses.png)
+![Diagrama de classes](laboratorio2/projeto/diagramaClasses/20250406_diagramaClasses.png)
 
 # Diagrama de pacotes
 ![Diagrama de pacotes](laboratorio2/projeto/diagramaPacotes/package-diagram.png)
 
 # Diagrama de componentes
-![Diagrama de componentes](laboratorio2/projeto/diagramaComponentes/202503_DiagramaComponentes.png)
+![Diagrama de componentes](laboratorio2/projeto/diagramaComponentes/20250406_diagramaComponentes.png)
+
+# Diagrama de implantação
+![Diagrama de implantação](laboratorio2/projeto/diagramaDeImplantacao/20250406_diagramaImplantacao.png)
 
 # Histórias de Usuário
 
-**Como** usuário,  
-**Eu quero** fazer login no sistema,  
-**Para que** eu possa acessar minhas informações pessoais e pedidos.  
+### Usuário (comum a todos)
 
----
+Como usuário,<br>
+Eu quero **realizar login no sistema**<br>
+Para acessar minhas funcionalidades e dados de forma segura.
 
-**Como** usuário,  
-**Eu quero** me cadastrar no sistema,  
-**Para que** eu possa acessar minhas informações pessoais e realizar pedidos.  
+Como usuário,<br>
+Eu quero **me cadastrar no sistema**<br>
+Para poder utilizar os serviços de aluguel de carros.
 
----
+Como usuário,<br>
+Eu quero **consultar meus pedidos**<br>
+Para acompanhar o status de cada um.
 
-**Como** cliente,  
-**Eu quero** consultar meus pedidos,  
-**Para que** eu possa acompanhar seu status e detalhes.  
+Como usuário,<br>
+Eu quero **modificar um pedido existente**<br>
+Para corrigir informações ou ajustar a solicitação antes da aprovação.
 
----
+### Cliente (especialização de Usuário)
 
-**Como** cliente,  
-**Eu quero** cancelar um pedido,  
-**Para que** eu possa desistir dele antes da execução do contrato.  
+Como cliente,<br>
+Eu quero **criar um novo pedido de aluguel de carro**<br>
+Para alugar um veículo conforme minha necessidade.
 
----
+Como cliente,<br>
+Eu quero **cancelar um pedido**<br>
+Para evitar cobranças ou mudanças indesejadas.
 
-**Como** cliente,  
-**Eu quero** modificar um pedido,  
-**Para que** eu possa ajustar informações antes da execução do contrato.  
+### Agente (especialização de Usuário)
 
----
+Como agente,<br>
+Eu quero **avaliar pedidos de aluguel**<br>
+Para aprovar ou rejeitar conforme critérios da empresa.
 
-**Como** cliente,  
-**Eu quero** criar um pedido,  
-**Para que** eu possa alugar um automóvel.  
+Como agente,<br>
+Eu quero **dar um parecer positivo em um pedido**<br>
+Para autorizar a execução do contrato de aluguel.
 
----
+Como agente,<br>
+Eu quero **dar um parecer negativo em um pedido**<br>
+Para impedir contratos que não atendem aos requisitos.
 
-**Como** agente,  
-**Eu quero** avaliar os pedidos criados,  
-**Para que** eu possa verificar se atendem aos critérios estabelecidos antes da execução.  
-
----
-
-**Como** agente,  
-**Eu quero** dar um parecer sobre os pedidos,  
-**Para que** eu possa aprovar ou rejeitar.  
-
----
-  
-**Como** agente,  
-**Eu quero** executar o contrato de um pedido aprovado,  
-**Para que** eu possa formalizar o aluguel do carro.  
-
----
-
-**Como** banco,
-**Eu quero** poder conceder contrato de crédito
-**Para** oferecer financiamento adequado aos clientes e gerar receita com juros.  
-
+Como agente,<br>
+Eu quero **executar o contrato após parecer positivo**<br>
+Para formalizar o aluguel e liberar o veículo ao cliente.

@@ -1,40 +1,24 @@
-@startuml name diagramaDeCasoDeUso_1.1
-scale 2
-left to right direction 
-skinparam PackageStyle rect
+@startuml
 actor Usuário
 actor Agente 
-actor Cliente 
-actor Banco
-rectangle sistema{
-    Cliente -> Usuário
-    Agente -> Usuário
+actor Cliente
+ 
+rectangle SistemaAluguelCarros{
+    Usuário -- (Realizar login)
+    Usuário -- (Realizar cadastro)
+    Usuário -- (Modificar pedido)
+    Usuário -- (Consultar pedido)
 
-    Usuário -- (Logar)
-    Usuário -- (Cadastrar)
-    Usuário -- (Modificar Pedido)
+    Cliente -- (Criar pedido)
+    Cliente -- (Cancelar pedido)
 
-    Agente -- (Avaliar Pedido)
-
-    Cliente -- (Consultar Pedido)
-    Cliente -- (Cancelar Pedido)
-    Cliente -- (Criar Pedido)
-
+    Agente -- (Avaliar pedido)
     
-
-    (Criar Pedido) .> (Avaliar Pedido) : include
-    (Avaliar Pedido) .> (Dar Parecer) : include
-    (Dar Parecer) <.  (Executar Contrato) : extends
-    (Dar Parecer) <.  (Não Executar Contrato) : extends
-    Agente -- (Solicitar Contrato de Crédito)
-
-    (Solicitar Contrato de Crédito) .> (Avaliar Solicitação de Contrato) : include
-    
-    Banco -- (Avaliar Solicitação de Contrato)
-    (Reprovar contrato de crédito)
-    
-    (Avaliar Solicitação de Contrato) <. (Conceder contrato de crédito) : extend
-    (Avaliar Solicitação de Contrato) <. (Reprovar contrato de crédito) : extend 
-    ''essa ultima linha que está atrapalhando o diagrama 
+    (Avaliar pedido) .> (Dar parecer positivo) : <<extends>>
+    (Avaliar pedido) .> (Dar parecer negativo) : <<extends>>
+    (Dar parecer positivo) .> (Executar Contrato) : <<include>>
     
 }
+Cliente -|> Usuário
+Agente -|> Usuário
+@enduml
