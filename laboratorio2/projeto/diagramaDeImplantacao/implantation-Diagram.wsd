@@ -1,39 +1,30 @@
 @startuml
-
-node "Servidor da Aplicação" as servidor {
-
-    component "Aplicação Spring Boot" as app
-
-    component "Cliente" as cliente
-    component "Contrato" as contrato
-    component "Pedido" as pedido
-    component "Agente" as agente
-
-    app -up- cliente
-    app -up- contrato
-    app -up- pedido
-    app -up- agente
+node ComputadorPessoal { 
+[Navegador]
 }
 
-node "Browser" as browser {
-    component "Gerenciamento de Pedidos" as pedidosUI
-    component "Gerenciamento de Contratos" as contratosUI
+node AplicacaoWeb {
 }
 
-node "Servidor Database" as database {
-    component "SQL Database" as db
+ComputadorPessoal  -- AplicacaoWeb : HTTP
+AplicacaoWeb -- ServidorAplicacao : HTTP
+
+node ServidorAplicacao {
+[AutenticacaoUsuario]
+[GestaoPedidosAluguel]
+[RegistroAutomovel]
+[AvaliacaoPedidos]
+[GestaoContrato]
 }
 
+[AutenticacaoUsuario] ..> [GestaoPedidosAluguel]
+[AutenticacaoUsuario] ..> [RegistroAutomovel]
+[GestaoPedidosAluguel] ..> [AvaliacaoPedidos]
+[AvaliacaoPedidos] ..> [GestaoContrato]
 
-browser --> servidor : HTTP
-servidor --> database : JDBC
+node BancoDeDados {
+[SGBD]
+}
 
-pedidosUI --> pedido
-pedidosUI --> cliente
-contratosUI --> contrato
-contratosUI --> agente
-
-
+ServidorAplicacao -- BancoDeDados : HTTP
 @enduml
-
-
