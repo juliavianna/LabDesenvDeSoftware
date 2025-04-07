@@ -24,9 +24,6 @@ public class Cliente extends Usuario {
     @Column(name = "rendimentos")
     private List<Float> rendimentos; // Alterado para List<Float>
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Pedido> pedidos;
-
     public Cliente(){
         super();
     }
@@ -79,13 +76,5 @@ public class Cliente extends Usuario {
 
     public void setRendimentos(List<Float> rendimentos) {
         this.rendimentos = rendimentos;
-    }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
     }
 }

@@ -15,9 +15,6 @@ public class Agente extends Usuario {
     @Enumerated(EnumType.STRING)
     TipoAgente tipo;
 
-    @OneToMany(mappedBy = "agente")
-    private List<Pedido> pedidos;
-
     // Construtor padrão obrigatório para o Hibernate
     public Agente() {
         super();
@@ -38,9 +35,5 @@ public class Agente extends Usuario {
 
     public void setTipo(TipoAgente tipo) {
         this.tipo = tipo;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
     }
 }

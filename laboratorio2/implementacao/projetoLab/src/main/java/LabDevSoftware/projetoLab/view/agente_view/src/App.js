@@ -10,6 +10,7 @@ import DeletarUsuario from './pages/DeletarUsuario';
 import ListarUsuarios from './pages/ListarUsuarios';
 import Pedidos from './pages/Pedidos';
 import LogOut from './pages/LogOut';
+import BuscarPedido from './pages/BuscarPedido';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/pedidos" element={<Pedidos />} />
         <Route path="/logout" element={<LogOut />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/buscar-pedido" element={<BuscarPedido />} />
       </Routes>
     </Router>
   );

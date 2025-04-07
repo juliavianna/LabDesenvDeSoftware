@@ -2,6 +2,11 @@ import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
+export async function getPedidoById(id) {
+    const response = await axios.get(`${API_URL}/pedidos/${id}`);
+    return response.data;
+}
+
 export async function getAgentes() {
     const response = await axios.get(`${API_URL}/agentes`);
     return response.data;
