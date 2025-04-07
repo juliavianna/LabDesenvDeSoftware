@@ -6,7 +6,12 @@ function Register() {
   const [tipoUsuario, setTipoUsuario] = useState("");
   const [cpf, setCpf] = useState("");
   const [cnpj, setCnpj] = useState("");
+  const [tipoEmpresa, setTipoEmpresa] = useState('');
+  const [rendimento1, setRendimento1] = useState('');
+  const [rendimento2, setRendimento2] = useState('');
+  const [rendimento3, setRendimento3] = useState('');
   const navigate = useNavigate();
+
 
   const handleTipoUsuarioChange = (e) => {
     if (tipoUsuario === e.target.value) {
@@ -62,7 +67,8 @@ function Register() {
       nome,
       email,
       senha,
-      cnpj: cnpjLimpo
+      cnpj: cnpjLimpo,
+      tipo: tipoEmpresa,
     };
 
     try {
@@ -84,10 +90,26 @@ function Register() {
     const cpfLimpo = cpf.replace(/\D/g, ''); // Remove formatação do CPF
     const profissao = e.target.profissao.value;
     const empregador = e.target.empregador.value;
-    const maxRendimentos = e.target.max_rendimentos.value;
+
+    const rendimentos = [rendimento1, rendimento2, rendimento3]
+      .map(val => parseFloat(val))
+      .filter(val => !isNaN(val)); // remove campos vazios
+
+    if (rendimentos.length === 0) {
+      alert("Preencha pelo menos um rendimento.");
+      return;
+    }
 
     const novoCliente = {
-      type: "CLIENTE", nome, email, senha, rg, cpf: cpfLimpo, profissao, empregador, maxRendimentos
+      type: "CLIENTE",
+      nome,
+      email,
+      senha,
+      rg,
+      cpf: cpfLimpo,
+      profissao,
+      empregador,
+      rendimentos
     };
 
     try {
@@ -126,16 +148,6 @@ function Register() {
             />
             Agente
           </label>
-          <label>
-            <input
-              type="radio"
-              name="tipoUsuario"
-              value="BANCO"
-              checked={tipoUsuario === "BANCO"}
-              onChange={handleTipoUsuarioChange}
-            />
-            Banco
-          </label>
         </div>
       </div>
 
@@ -154,18 +166,38 @@ function Register() {
             <input type="password" id="senha" name="senha" required />
           </div>
           <div className="form-group">
-            <label htmlFor="profissao">Profissao:</label>
+            <label htmlFor="profissao">Profissão:</label>
             <input type="text" id="profissao" name="profissao" required />
           </div>
           <div className="form-group">
             <label htmlFor="empregador">Empregador:</label>
             <input type="text" id="empregador" name="empregador" required />
           </div>
-          <select name="maxRendimentos">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
+          <div className="form-group">
+            <label>Rendimentos (preencha pelo menos 1):</label>
+            <input
+              type="number"
+              step="0.01"
+              placeholder="Rendimento 1 (obrigatório)"
+              value={rendimento1}
+              onChange={(e) => setRendimento1(e.target.value)}
+              required
+            />
+            <input
+              type="number"
+              step="0.01"
+              placeholder="Rendimento 2 (opcional)"
+              value={rendimento2}
+              onChange={(e) => setRendimento2(e.target.value)}
+            />
+            <input
+              type="number"
+              step="0.01"
+              placeholder="Rendimento 3 (opcional)"
+              value={rendimento3}
+              onChange={(e) => setRendimento3(e.target.value)}
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="cpf">CPF:</label>
             <input
@@ -205,33 +237,19 @@ function Register() {
               required
             />
           </div>
-          <button type="submit">Cadastrar Agente</button>
-        </form>
-      )}
-      {tipoUsuario === "BANCO" && (
-        <form onSubmit={cadastrarAgente} className="register-form">
           <div className="form-group">
-            <label htmlFor="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="cnpj">CNPJ:</label>
-            <input
-              type="text"
-              id="cnpj"
-              value={cnpj}
-              onChange={handleCnpjChange}
-              placeholder="00.000.000/0000-00"
+            <label htmlFor="tipo">Tipo de Agente:</label>
+            <select
+              id="tipo"
+              name="tipo"
+              value={tipoEmpresa}
+              onChange={(e) => setTipoEmpresa(e.target.value)}
               required
-            />
+            >
+              <option value="">Selecione o tipo</option>
+              <option value="BANCO">BANCO</option>
+              <option value="EMPRESA">EMPRESA</option>
+            </select>
           </div>
           <button type="submit">Cadastrar Agente</button>
         </form>

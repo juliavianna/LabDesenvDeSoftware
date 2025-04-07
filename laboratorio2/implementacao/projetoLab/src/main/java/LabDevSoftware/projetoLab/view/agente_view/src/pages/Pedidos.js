@@ -5,39 +5,39 @@ import Sidebar from '../components/Sidebar';
 
 const Pedidos = () => {
     const [pedido, setPedido] = useState({
-        status: 'PENDENTE',
+        dataPedido: new Date().toISOString().split('T')[0], // yyyy-MM-dd
+        status: 'Pendente',
         cliente: { id: '' },
         agente: { id: '' },
         automovel: { id: '' },
-        contrato: { id: '' }
     });
-    const [clientes, setClientes] = useState([]);
     const [agentes, setAgentes] = useState([]);
     const [automoveis, setAutomoveis] = useState([]);
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState({});
 
+
+    // Buscando agentes
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const [clientesRes, agentesRes, automoveisRes] = await Promise.all([
-                    axios.get('http://localhost:8080/clientes/'),
-                    axios.get('http://localhost:8080/agentes/'),
-                    axios.get('http://localhost:8080/automoveis/'),
-                ]);
-                setClientes(clientesRes.data);
-                setAgentes(agentesRes.data);
-                setAutomoveis(automoveisRes.data);
-            } catch (error) {
-                console.error('Erro ao carregar dados:', error);
-                setMessage('Erro ao carregar dados. Por favor, tente novamente.');
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
+        axios.get('http://localhost:8080/agentes')
+            .then(response => {
+                setAgentes(response.data);
+            })
+            .catch(error => {
+                console.error('Erro ao buscar agentes:', error);
+            });
+    }, []);
+
+    // Buscando automóveis
+    useEffect(() => {
+        axios.get('http://localhost:8080/automoveis')
+            .then(response => {
+                setAutomoveis(response.data); // define os automóveis para renderizar no select
+            })
+            .catch(error => {
+                console.error('Erro ao buscar automóveis:', error);
+            });
     }, []);
 
     const validateForm = () => {
@@ -49,20 +49,20 @@ const Pedidos = () => {
         return Object.keys(newErrors).length === 0;
     };
 
+    // Função para criar um novo pedido
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
-
         setLoading(true);
         try {
-            const response = await axios.post('/pedidos', pedido);
+            const response = await axios.post('http://localhost:8080/pedidos', pedido);
             setMessage('Pedido criado com sucesso!');
             setPedido({
-                status: 'PENDENTE',
+                dataPedido: new Date().toISOString().split('T')[0], // yyyy-MM-dd
+                status: 'Pendente',
                 cliente: { id: '' },
                 agente: { id: '' },
                 automovel: { id: '' },
-                contrato: { id: '' }
             });
             setErrors({});
         } catch (error) {
@@ -100,25 +100,26 @@ const Pedidos = () => {
         <div className="page-container">
             <Sidebar />
             <div className={`pedidos-container ${loading ? 'loading' : ''}`}>
-                
+
                 <div className="pedidos-header">
                     <h2>Criar Novo Pedido de Aluguel </h2>
                 </div>
-                
+
                 {message && (
                     <div className={`alert ${message.includes('sucesso') ? 'alert-success' : 'alert-danger'}`}>
                         {message}
                     </div>
                 )}
-                
+
                 <form onSubmit={handleSubmit} className="pedidos-form">
-                    
+
                     <div className="form-group">
                         <label className="form-label">Cliente</label>
                         <input
-                            type="cliente"
+                            type="text"
+                            name="cliente.id"
                             id="cliente"
-                            value={pedido.cliente.id}
+                            value={pedido.cliente?.id || ""}
                             onChange={handleChange}
                             required
                         />
@@ -126,21 +127,28 @@ const Pedidos = () => {
 
                     <div className="form-group">
                         <label className="form-label">Agente</label>
-                        <input
-                            type="agente"
-                            id="agente"
+                        <select
+                            className={`form-select ${errors.agente ? 'error-input' : ''}`}
+                            name="agente.id"
                             value={pedido.agente.id}
                             onChange={handleChange}
                             required
-                        />
+                        >
+                            <option value="">Selecione um agente</option>
+                            {agentes.map(agente => (
+                                <option key={agente.id} value={agente.id}>
+                                    {agente.nome}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className="form-group">
                         <label className="form-label">Automóvel</label>
-                        <select 
+                        <select
                             className={`form-select ${errors.automovel ? 'error-input' : ''}`}
-                            name="automovel.id" 
-                            value={pedido.automovel.id} 
+                            name="automovel.id"
+                            value={pedido.automovel.id}
                             onChange={handleChange}
                             required
                         >
@@ -154,8 +162,8 @@ const Pedidos = () => {
                         {errors.automovel && <div className="error-message">{errors.automovel}</div>}
                     </div>
 
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         className="submit-button"
                         disabled={loading}
                     >
