@@ -10,19 +10,19 @@ function Sidebar() {
             <Link to="/home">Home</Link>
           </li>
           <li>
-            <Link to="/buscar">Buscar Usuário</Link>
+            <Link to="/buscar">Buscar usuário</Link>
           </li>
           <li>
-            <Link to="/atualizar">Atualizar Usuário</Link>
+            <Link to="/atualizar">Atualizar usuário</Link>
           </li>
           <li>
-            <Link to="/deletar">Deletar Usuário</Link>
+            <Link to="/deletar">Deletar usuário</Link>
           </li>
           <li>
-            <Link to="/listar">Listar Usuários</Link>
+            <Link to="/pedidos">Criar pedido</Link>
           </li>
           <li>
-            <Link to="/pedidos">Pedidos</Link>
+            <Link to="/buscar-pedido">Buscar pedido</Link>
           </li>
           <li className="logout-link">
             <Link to="/logout">Sair</Link>
