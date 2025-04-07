@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
 @RequestMapping("/clientes")
 public class ClienteController {
     
-     @Autowired
+    @Autowired
     private ClienteService clienteService;
 
     @Operation(summary = "Criar novo cliente", description = "Endpoint POST que cria um novo cliente")
@@ -52,10 +52,6 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deletarCliente(@PathVariable Long id) {
         return clienteService.deletar(id);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscarClientePorId(@PathVariable Long id) {
-        return clienteService.buscarPorId(id);
     }
 
 }
