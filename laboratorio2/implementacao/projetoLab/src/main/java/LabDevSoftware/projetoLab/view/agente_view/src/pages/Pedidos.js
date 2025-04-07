@@ -14,7 +14,6 @@ const Pedidos = () => {
     const [clientes, setClientes] = useState([]);
     const [agentes, setAgentes] = useState([]);
     const [automoveis, setAutomoveis] = useState([]);
-    const [contratos, setContratos] = useState([]);
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState({});
@@ -23,16 +22,14 @@ const Pedidos = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const [clientesRes, agentesRes, automoveisRes, contratosRes] = await Promise.all([
-                    axios.get('/api/clientes'),
-                    axios.get('/api/agentes'),
-                    axios.get('/api/automoveis'),
-                    axios.get('/api/contratos')
+                const [clientesRes, agentesRes, automoveisRes] = await Promise.all([
+                    axios.get('http://localhost:8080/clientes/'),
+                    axios.get('http://localhost:8080/agentes/'),
+                    axios.get('http://localhost:8080/automoveis/'),
                 ]);
                 setClientes(clientesRes.data);
                 setAgentes(agentesRes.data);
                 setAutomoveis(automoveisRes.data);
-                setContratos(contratosRes.data);
             } catch (error) {
                 console.error('Erro ao carregar dados:', error);
                 setMessage('Erro ao carregar dados. Por favor, tente novamente.');
@@ -58,7 +55,7 @@ const Pedidos = () => {
 
         setLoading(true);
         try {
-            const response = await axios.post('/api/pedidos', pedido);
+            const response = await axios.post('/pedidos', pedido);
             setMessage('Pedido criado com sucesso!');
             setPedido({
                 status: 'PENDENTE',
@@ -116,7 +113,6 @@ const Pedidos = () => {
                 
                 <form onSubmit={handleSubmit} className="pedidos-form">
                     
-
                     <div className="form-group">
                         <label className="form-label">Cliente</label>
                         <input
@@ -156,23 +152,6 @@ const Pedidos = () => {
                             ))}
                         </select>
                         {errors.automovel && <div className="error-message">{errors.automovel}</div>}
-                    </div>
-
-                    <div className="form-group">
-                        <label className="form-label">Contrato</label>
-                        <select 
-                            className="form-select"
-                            name="contrato.id" 
-                            value={pedido.contrato.id} 
-                            onChange={handleChange}
-                        >
-                            <option value="">Selecione um contrato (opcional)</option>
-                            {contratos.map(contrato => (
-                                <option key={contrato.id} value={contrato.id}>
-                                    Contrato #{contrato.id}
-                                </option>
-                            ))}
-                        </select>
                     </div>
 
                     <button 

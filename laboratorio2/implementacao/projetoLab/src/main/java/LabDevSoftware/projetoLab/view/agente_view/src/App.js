@@ -21,8 +21,10 @@ function App() {
         <Route path="/buscar" element={<BuscarUsuario />} />
         <Route path="/atualizar" element={<AtualizarUsuario />} />
         <Route path="/deletar" element={<DeletarUsuario />} />
-        <Route path="/listar" element={<ListarUsuarios />} /><Route path="/pedidos" element={<Pedidos />} />
+        <Route path="/listar" element={<ListarUsuarios />} />
+        <Route path="/pedidos" element={<Pedidos />} />
         <Route path="/logout" element={<LogOut />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );
