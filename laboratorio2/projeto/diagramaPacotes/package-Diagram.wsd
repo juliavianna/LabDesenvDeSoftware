@@ -1,35 +1,45 @@
 @startuml
+left to right direction
+
 package "SistemaLocacao" {
-  
+
+
   package "Frontend" {
     package "UI" {
       package HomePage{}
-      package CadastroPage{}
+      package SearchPage{}
+      package UpdatePage{}
+      package DeletePage{}
+      package UserlistPage{}
       package PedidoPage{}
+      package LogoutPage{}
     }
 
-    package "Services" {
-      package PedidoService{}
-      package ContratoService{}
-      package UsuarioService{}
-      package AutomovelService{}
-    }
   }
 
   package "Backend" {
 
+    package "Services" {
+      package Agente{}
+      package Cliente{}
+      package Contrato{}
+      package Pedido{}
+      package Usuario{}
+    }
+
     package "Controllers" {
       package PedidoController{}
-      package UsuarioController{}
-      package AutomovelController{}
-      package ContratoController{}  
+      package LoginController{}
+      package ClienteController{}
+      package AgenteController{}  
     }
 
     package "Repositories" {
       package PedidoRepository{}
-      package ContratoRepository{}
+      package ClienteRepository{}
       package UsuarioRepository{}
       package AutomovelRepository{}
+      package AgenteRepository{}
     }
 
     package "Models" {
@@ -38,18 +48,18 @@ package "SistemaLocacao" {
       package Cliente{}
       package Agente{}
       package Automovel{}
-      package Empresa{}
-      package Banco{}
+      package EntidadeEmpregadora{}
+      package Usuario{}
+      package Endereco{}
     }
   }
 
 }
 
 ' Relacionamentos
-Frontend.Controllers -- Backend.Services
+Backend.Controllers --> Backend.Services
 Backend.Services -- Backend.Repositories
 Backend.Repositories --> Backend.Models
 
 
 @enduml
-
