@@ -8,32 +8,72 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
+import LabDevSoftware.projetoLab.entity.Agente;
+import LabDevSoftware.projetoLab.entity.Cliente;
+import io.swagger.v3.oas.annotations.Operation;
+import LabDevSoftware.projetoLab.service.AgenteService;
+import LabDevSoftware.projetoLab.service.ClienteService;
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin(origins = "*")
+@RequestMapping("/login")
 public class LoginController {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+    @Autowired
+    private AgenteService agenteService;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private ClienteService clienteService;
 
-    @PostMapping("/login")
+    @Operation(summary = "Fazer Login", description = "Endpoint POST que faz Login no sistema")
+    @PostMapping
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        logger.info("Tentativa de login com email: {}", loginRequest.getEmail());
-        boolean isAuthenticated = usuarioService.autenticar(loginRequest.getEmail(), loginRequest.getSenha());
-        logger.info("Resultado da autenticação: {}", isAuthenticated);
-        
-        if (isAuthenticated) {
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "Login successful");
-            response.put("email", loginRequest.getEmail());
-            return ResponseEntity.ok().body(response);
-        } else {
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "Email ou senha incorretos");
-            return ResponseEntity.badRequest().body(response);
+        try {
+            // Buscar todos os agentes
+            for (Agente agente : agenteService.listarTodos()) {
+                if (agente.getEmail() != null && agente.getEmail().equals(loginRequest.getEmail())) {
+                    if (agente.getSenha().equals(loginRequest.getSenha())) {
+                        Map<String, Object> response = new HashMap<>();
+                        response.put("message", "Login bem-sucedido!");
+                        response.put("tipo", "AGENTE");
+                        response.put("id", agente.getId());
+                        response.put("nome", agente.getNome());
+                        response.put("email", agente.getEmail());
+                        return ResponseEntity.ok().body(response);
+                    } else {
+                        Map<String, String> errorResponse = new HashMap<>();
+                        errorResponse.put("message", "Senha incorreta");
+                        return ResponseEntity.badRequest().body(errorResponse);
+                    }
+                }
+            }
+
+            // Buscar todos os clientes
+            for (Cliente cliente : clienteService.listarTodos()) {
+                if (cliente.getEmail() != null && cliente.getEmail().equals(loginRequest.getEmail())) {
+                    if (cliente.getSenha().equals(loginRequest.getSenha())) {
+                        Map<String, Object> response = new HashMap<>();
+                        response.put("message", "Login successful");
+                        response.put("tipo", "CLIENTE");
+                        response.put("id", cliente.getId());
+                        response.put("nome", cliente.getNome());
+                        response.put("email", cliente.getEmail());
+                        return ResponseEntity.ok().body(response);
+                    } else {
+                        Map<String, String> errorResponse = new HashMap<>();
+                        errorResponse.put("message", "Senha incorreta");
+                        return ResponseEntity.badRequest().body(errorResponse);
+                    }
+                }
+            }
+
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Email não encontrado");
+            return ResponseEntity.badRequest().body(errorResponse);
+
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Erro interno do servidor");
+            return ResponseEntity.internalServerError().body(errorResponse);
         }
     }
 }
@@ -57,4 +97,4 @@ class LoginRequest {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-} 
+}
